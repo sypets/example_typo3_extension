@@ -1,0 +1,58 @@
+{
+	"name": "sypets/example-typo3-extension",
+	"type": "typo3-cms-extension",
+	"description": "Example TYPO3 extension",
+	"license": ["GPL-2.0-or-later"],
+	"keywords": [
+		"TYPO3",
+		"TYPO3 extension"
+	],
+	"authors": [
+		{
+			"name": "Sybille Peters",
+			"email": "sypets@gmx.de",
+			"role": "Developer"
+		}
+	],
+	"config": {
+		"sort-packages": true,
+		"vendor-dir": ".Build/vendor",
+		"bin-dir": ".Build/bin"
+	},
+	"require": {
+		"php": "^7.3 || ^7.4",
+		"typo3/cms-core": "^10.4.14 || ^11.5.3",
+		"typo3/cms-backend": "^10.4.14 || ^11.5.3",
+		"typo3/cms-fluid": "^10.4.14 || ^11.5.3"
+	},
+	"require-dev": {
+		"friendsofphp/php-cs-fixer": "^2.18.6",
+		"phpunit/phpunit": "^8.5.21",
+		"typo3/testing-framework": "^6.14.0"
+	},
+	"conflict": {
+		"typo3/cms": "*"
+	},
+	"extra": {
+		"typo3/cms": {
+			"extension-key": "example_typo3_extension",
+			"cms-package-dir": "{$vendor-dir}/typo3/cms",
+			"web-dir": ".Build/Web"
+		}
+	},
+	"autoload": {
+		"psr-4": {
+			"Sypets\\ExampleTypo3Extension\\": "Classes/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Sypets\\ExampleTypo3Extension\\Tests\\": "Tests/"
+		}
+	},
+	"scripts": {
+		"post-autoload-dump": [
+			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
+		]
+	}
+}
