@@ -33,5 +33,10 @@ jobs:
     name: Test with Composer (without runTests.sh)
     runs-on: ubuntu-20.04
     steps:
-    - uses: actions/checkout@v2
-    - uses: php-actions/composer@v6
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Composer install
+        uses: php-actions/composer@v6
+        with:
+          command: composer install
