@@ -25,5 +25,6 @@ jobs:
       - name: Info
         run: composer --version
 
-      - name: Composer
-        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s ${{ matrix.minMax }}
+      - name: Composer install
+        #run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s ${{ matrix.minMax }}
+        run: composer install
