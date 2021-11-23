@@ -11,8 +11,8 @@ on:
 
 jobs:
 
-  testsuite:
-    name: all tests
+  runTests:
+    name: Test with runTests.sh
     runs-on: ubuntu-20.04
     strategy:
       matrix:
@@ -26,5 +26,11 @@ jobs:
         run: composer --version
 
       - name: Composer install
-        #run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s ${{ matrix.minMax }}
-        run: composer install
+        run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s ${{ matrix.minMax }}
+
+  composer:
+    name: Test with Composer (without runTests.sh)
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+    - uses: php-actions/composer@v6
