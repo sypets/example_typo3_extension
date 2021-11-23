@@ -11,6 +11,8 @@ on:
 
 jobs:
 
+# This uses runTest.sh to run composer install
+# result: fail
   runTests:
     name: Test with runTests.sh
     runs-on: ubuntu-20.04
@@ -29,14 +31,44 @@ jobs:
       - name: Composer install
         run: Build/Scripts/runTests.sh -p ${{ matrix.php }} -s ${{ matrix.minMax }}
 
-  composer:
-    name: Test with Composer (without runTests.sh)
+# todo
+# https://tomasvotruba.com/blog/2020/11/23/how-to-get-dynamic-php-version-matrix-in-github-actions/
+
+# this only does the composer install
+# result: ok
+  composer1:
+    name: Test with composer install
     runs-on: ubuntu-20.04
     steps:
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Composer install
-        uses: php-actions/composer@v6
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
         with:
-          command: composer install
+          php-version: 7.4
+      - run: composer install --no-progress --ansi
+
+# this does composer install and composer require
+# result: fail
+  composer2:
+    name: Test with composer install and require
+    runs-on: ubuntu-20.04
+    steps:
+      - uses: actions/checkout@v2
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: 7.4
+      - run: composer install --no-progress --ansi
+
+      # now add a requirement
+      - run: composer require typo3/cms-frontend:^11.5.3
+
+
+#  composer:
+#    name: Test with Composer (without runTests.sh)
+#    runs-on: ubuntu-20.04
+#    steps:
+#      name: Composer install
+#        uses:
+#        - actions/checkout@v2
+#        - php-actions/composer@v6
+#        with:
+#          php_version: 7.4
