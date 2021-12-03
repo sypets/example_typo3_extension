@@ -49,10 +49,5 @@
 		"psr-4": {
 			"Sypets\\ExampleTypo3Extension\\Tests\\": "Tests/"
 		}
-	},
-	"scripts": {
-		"post-autoload-dump": [
-			"TYPO3\\TestingFramework\\Composer\\ExtensionTestEnvironment::prepare"
-		]
 	}
 }
